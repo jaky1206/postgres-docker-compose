@@ -1,0 +1,24 @@
+version: '3.1'
+
+services:
+  
+  db1.postgres:
+    build:
+      context: ./docker/
+      dockerfile: Dockerfile
+    ports:
+      - "${HOST_PORT}:${DB_PORT}"
+    container_name: db1.postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: "${POSTGRES_PASSWORD}"
+    volumes:
+        - ./data:/var/lib/postgresql/data
+    networks:
+      mariadb-network:
+        aliases:
+          - db1.postgres.example.com
+
+networks:
+  mariadb-network:
+    driver: bridge
