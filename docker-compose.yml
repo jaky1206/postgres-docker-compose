@@ -8,6 +8,8 @@ services:
       dockerfile: Dockerfile
     ports:
       - "${HOST_PORT}:${DB_PORT}"
+    volumes:
+      - ./data:/var/lib/postgresql/data
     container_name: db1.postgres
     restart: always
     environment:
